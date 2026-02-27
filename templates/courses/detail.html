@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}CampusFlow | {{ item.title }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>{{ item.title }}</h1>
+  <p>{{ item.description }}</p>
+</section>
+
+<section class="stats-grid">
+  <article class="stat-card"><h3>Level</h3><p>{{ item.level }}</p></article>
+  <article class="stat-card"><h3>Price</h3><p>${{ item.price }}</p></article>
+  <article class="stat-card"><h3>Category</h3><p>{{ item.category.name }}</p></article>
+  <article class="stat-card"><h3>Instructor</h3><p>{{ item.instructor.full_name }}</p></article>
+</section>
+
+<section class="panel">
+  <h2>Modules and Lectures</h2>
+  {% for m in modules %}
+  <div class="module-block">
+    <h3>Module {{ m.order }}: {{ m.title }}</h3>
+    <ul>
+      {% for l in m.lectures.all %}
+      <li>{{ l.order }}. {{ l.title }} ({{ l.duration }} sec)</li>
+      {% empty %}
+      <li>No lectures yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% empty %}
+  <p>No modules available for this course.</p>
+  {% endfor %}
+</section>
+
+<section class="actions-row">
+  <a class="btn secondary" href="/courses/{{ item.id }}/edit/">Edit</a>
+  <a class="btn danger" href="/courses/{{ item.id }}/delete/">Delete</a>
+  <a class="btn" href="/">Back Home</a>
+</section>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}CampusFlow | Published Courses{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Published Courses</h1>
+  <p>Learning catalog for students and instructors.</p>
+  <div class="meta">Data Source: <strong>{{ source }}</strong> | Response Time: <strong>{{ time }}</strong></div>
+</section>
+
+<section class="stats-grid">
+  <article class="stat-card">
+    <h3>Total Courses</h3>
+    <p>{{ total_courses }}</p>
+  </article>
+  <article class="stat-card">
+    <h3>Published</h3>
+    <p>{{ published_courses }}</p>
+  </article>
+  <article class="stat-card">
+    <h3>Categories</h3>
+    <p>{{ total_categories }}</p>
+  </article>
+  <article class="stat-card">
+    <h3>Instructors</h3>
+    <p>{{ total_instructors }}</p>
+  </article>
+</section>
+
+<section class="panel">
+  <h2>Course List</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Level</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Instructor</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in courses %}
+        <tr>
+          <td>{{ c.title }}</td>
+          <td>{{ c.level }}</td>
+          <td>${{ c.price }}</td>
+          <td>{{ c.category__name }}</td>
+          <td>{{ c.instructor__full_name }}</td>
+          <td class="actions">
+            <a class="btn small" href="/courses/{{ c.id }}/">View</a>
+            <a class="btn small secondary" href="/courses/{{ c.id }}/edit/">Edit</a>
+            <a class="btn small danger" href="/courses/{{ c.id }}/delete/">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6">No published courses found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CampusFlow{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="/">CampusFlow OCMS</a>
+      <nav class="menu">
+        <a href="/">Home</a>
+        <a href="/admin/" target="_blank" rel="noreferrer">Admin</a>
+        <a href="/api/courses/courses/" target="_blank" rel="noreferrer">Courses API</a>
+        <a href="/api/dashboard/stats/" target="_blank" rel="noreferrer">Dashboard API</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
